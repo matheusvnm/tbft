@@ -2,7 +2,7 @@
 
 Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framework that is completely transparent to both the developer and the end-user. Without any recompilation, code modification or OS installitions, it is capable of finding, automatically and at run-time, the optimal number of threads for the parallel regions and at the same time controls the turbo boosting mode to optimize the performance and energy consumption. 
 
-### List of files contained in tbft
+### List of files contained in TBFT
 ---
 
 * tbft.c                -  tbft functions implementation
