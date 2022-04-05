@@ -119,14 +119,14 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
   strcat(command, pid);
   strcat(command, " &");
 
-  if (env == NULL || path_var == NULL || path_var == "") {
+  if (env == NULL || path_var == NULL) {
     printf("POSEIDON: Disabled\n");
     printf("Please, activate the environment variables.");
     lib_init(3,0); 
     *pvalue = -1;
     return false;
   }
-  
+
   if ((strcmp("PERFORMANCE",env) == 0) || (strcmp("performance",env) == 0)) {
     printf("POSEIDON - OpenMP Application Optimized for Performance\n");
     *pvalue = 1;
