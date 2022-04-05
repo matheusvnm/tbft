@@ -30,6 +30,7 @@
 #include "libgomp.h"
 #include "gomp-constants.h"
 #include <limits.h>
+#include <unistd.h>
 #ifndef LIBGOMP_OFFLOADED_ONLY
 #include "libgomp_f.h"
 #include "oacc-int.h"
@@ -104,14 +105,19 @@ int goacc_default_dims[GOMP_DIM_MAX];
 
 
 static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char *path_env){
+        char pid[10];
         char *env = getenv(name);
-         char *bash = "bash ";
+        char *bash = "bash ";
         char *path_var = getenv(path_env);
-        char *boost_file = "boost.sh &";
-        char temp[200];
-        strcpy(temp, bash);
-        strcat(temp, path_var);
-        strcat(temp, boost_file);
+        char *boost_file = "boost.sh ";
+
+	sprintf(pid, "%d", getpid());
+        char *command = (char *)malloc(sizeof(char)*sizeof(bash)*sizeof(path_var)*sizeof(boost_file)*sizeof(pid) + 2);
+        strcpy(command, bash);
+        strcat(command, path_var);
+        strcat(command, boost_file);
+        strcat(command, pid);
+	strcat(command, " &");
 
         if(env == NULL || path_var == NULL){
                 printf("POSEIDON: Disabled\n");
@@ -124,8 +130,8 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
         if( (strcmp("TRUE",env) == 0) || (strcmp("true",env) == 0)){
                 printf("POSEIDON - OpenMP Application Optimized for EDP\n");
                 *pvalue = 2;
-                system(temp);
-        }else{
+                system(command);
+        } else {
                 printf("POSEIDON - Optimization not recognized or libgomp path not found!\n");
                 printf("POSEIDON: Disabled\n");
                 printf("\n\t\tPlease follow the steps:\n");
@@ -135,7 +141,7 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
                 lib_init(3,0);
                 return false;
         }
-
+	free(command);
         return true;
 }
 
