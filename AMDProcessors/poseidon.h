@@ -29,8 +29,7 @@
 
 #define MAX_KERNEL              61
 #define MAX_THREADS             32
-#define PERFORMANCE             0
-#define ENERGY                  1
+#define PERFORMANCE             1
 #define EDP                     2
 #define POWER		        3
 #define TEMPERATURE             4

@@ -91,7 +91,28 @@ void lib_end_parallel_region()
                         time = omp_get_wtime() - libKernels[id_actual_region].initResult;
                         energy = lib_end_amd_msr();
                         result = time * energy;
-                        /* If the result is negative, it means some problem while reading of the hardware counter. Then, the metric changes to performance */
+                        /* If the result is negative, it means some problem while reading of the hardware counter. 
+                        Then, the metric changes to performance */
+                        if (result == 0.00000 || result < 0)
+                        {
+                                libKernels[id_actual_region].state = REPEAT;
+                                libKernels[id_actual_region].metric = PERFORMANCE;
+                        }
+                        break;
+                case POWER:
+                        time = omp_get_wtime() - libKernels[id_actual_region].initResult;
+                        energy = lib_end_amd_msr();
+                        result = energy/time;
+                        if (result == 0.00000 || result < 0)
+                        {
+                                libKernels[id_actual_region].state = REPEAT;
+                                libKernels[id_actual_region].metric = PERFORMANCE;
+                        }
+                        break;
+                case TEMPERATURE:
+                        time = omp_get_wtime() - libKernels[id_actual_region].initResult;
+                        energy = lib_end_amd_msr();
+                        result = sqrt((energy*energy) + (time*time));
                         if (result == 0.00000 || result < 0)
                         {
                                 libKernels[id_actual_region].state = REPEAT;

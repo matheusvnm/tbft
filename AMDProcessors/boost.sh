@@ -8,7 +8,7 @@ while ps -p $1 > /dev/null:
 do
         sed -i 's/,/./g' out.txt
         ipc=$(egrep "insn" out.txt | awk '{print $4}')
-        #echo "ipc = $ipc"
+        #echo "IPC = $ipc"
         if [ $(echo "$ipc>$IPC_TARGET"| bc) -eq 0 ] && [ $ACTUAL_STATE -eq $TURBO_ENABLED ] ;
         then
                 ACTUAL_STATE=$TURBO_DISABLED
@@ -21,4 +21,3 @@ do
         fi
         perf stat -e instructions,cycles -o out.txt sleep $TIME_TARGET
 done
-#echo "Process killed finishing boosting mode"
