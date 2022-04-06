@@ -245,7 +245,6 @@ void lib_destructor()
         id_actual_region = MAX_KERNEL - 1;
         float energy = lib_end_rapl_sysfs();
         float edp = time * energy;
-        system("PID_BOOST_TEMP=$(ps -afx | grep boost.sh | awk '{print $1}'); PID_BOOST=$(echo $PID_BOOST_TEMP | awk '{print $4}'); kill -9 $PID_BOOST");
         printf("POSEIDON - Execution Time: %.5f seconds\n", time);
         printf("POSEIDON - Energy: %.5f joules\n", energy);
         printf("POSEIDON - EDP: %.5f\n", edp);
