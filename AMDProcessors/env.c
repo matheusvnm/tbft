@@ -147,7 +147,7 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     printf("POSEIDON - Optimization not recognized or libgomp path not found!\n");
     printf("POSEIDON: Disabled\n");
     printf("\n\t\tPlease follow the steps:\n");
-    printf("\t\t1 - export OMP_POSEIDON=TRUE or export OMP_POSEIDON=true.\n");
+    printf("\t\t1 - export OMP_POSEIDON=METRIC or export OMP_POSEIDON=metric.\n");
     printf("\t\t2 - export OMP_POSEIDON_BOOST_PATH=/PATH/TO/BOOST.SH/\n");
     *pvalue = -1;
     lib_init(3,0);
