@@ -97,6 +97,26 @@ void lib_end_parallel_region()
                                 libKernels[id_actual_region].metric = PERFORMANCE;
                         }
                         break;
+                case POWER:
+                        time = omp_get_wtime() - libKernels[id_actual_region].initResult;
+                        energy = lib_end_rapl_sysfs();
+                        result = energy/time;    
+                        if (result == 0.00000 || result < 0)
+                        {
+                                libKernels[id_actual_region].state = REPEAT;
+                                libKernels[id_actual_region].metric = PERFORMANCE;
+                        }
+                        break;
+                case TEMPERATURE:
+                        time = omp_get_wtime() - libKernels[id_actual_region].initResult;
+                        energy = lib_end_rapl_sysfs();
+                        result = sqrt((energy*energy) + (time*time));
+                        if (result == 0.00000 || result < 0)
+                        {
+                                libKernels[id_actual_region].state = REPEAT;
+                                libKernels[id_actual_region].metric = PERFORMANCE;
+                        }
+                        break;
                 }
                 switch (libKernels[id_actual_region].state)
                 {
