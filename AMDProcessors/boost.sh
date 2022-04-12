@@ -4,7 +4,7 @@ TURBO_DISABLED="0"
 TURBO_ENABLED="1"
 ACTUAL_STATE=$(</sys/devices/system/cpu/cpufreq/boost)
         perf stat -e instructions,cycles -o out.txt sleep 1.0
-while ps -p $1 > /dev/null:
+while test -d /proc/$1/
 do
         sed -i 's/,/./g' out.txt
         ipc=$(egrep "insn" out.txt | awk '{print $4}')
