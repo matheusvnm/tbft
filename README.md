@@ -45,7 +45,7 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 ### Acknowledgement
 ---
 
-TBFT has been mainly developed by Sandro Matheus Vila Nova Marques (sandro-matheus@hotmail.com) during his BSc. under supervision of Arthur Francisco Lorenzon (aflorenzon@unipampa.edu.br).
+TBFT has been mainly developed by Sandro Matheus Vila Nova Marques (sandro-matheus@hotmail.com) during his BSc/MSc. under supervision of Arthur Francisco Lorenzon (aflorenzon@unipampa.edu.br).
 
 When using TBFT, please use the following reference:
 
