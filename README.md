@@ -16,6 +16,14 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 * Makefile.am           -  OpenMP libgomp makefile.am
 
 
+### TBFT's dependencies.
+
+1. MSR Module (only in AMD Version).
+2. Intel RAPL (only in Intel Version).
+3. ACPI cpu-freq driver.
+
+**IMPORTANT: Poseidon only works with GCC 9.X version or superior.**
+
 
 ### How to install TBFT?
 ---
@@ -27,9 +35,6 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
       - cd /path/gcc-version/libgomp
       - make
       - make install
-
-
-**IMPORTANT: TBFT only works with GCC 9.2 version or superior.**
 
 
 ### How to use TBFT?
