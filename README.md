@@ -5,6 +5,7 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 ### List of files contained in TBFT
 ---
 
+* boost.sh              -  tbft algorithm to control the turbo boosting techniques.
 * tbft.c                -  tbft functions implementation
 * tbft.h                -  tbft header
 * env.c                 -  OpenMP internal controler variables
