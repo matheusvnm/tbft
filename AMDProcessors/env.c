@@ -103,25 +103,13 @@ int goacc_default_dims[GOMP_DIM_MAX];
 
 /* Parse the OMP_SCHEDULE environment variable.  */
 
-
-static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char *path_env){
-  char pid[10];
+static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char *boost_path){
   char *env = getenv(name);
-  char *bash = "bash ";
-  char *path_var = getenv(path_env);
-  char *boost_file = "boost.sh ";
-
-  sprintf(pid, "%d", getpid());
-  char *command = (char *)malloc(sizeof(char) * sizeof(bash) * sizeof(path_var) * sizeof(boost_file) * sizeof(pid) + 2);
-  strcpy(command, bash);
-  strcat(command, path_var);
-  strcat(command, boost_file);
-  strcat(command, pid);
-  strcat(command, " &");
-
-  if (env == NULL || path_var == NULL) {
+  if (env == NULL || boost_path == NULL) {
     printf("POSEIDON: Disabled\n");
-    printf("Please, activate the environment variables.");
+    printf("\n\t\tPlease follow the steps:\n");
+    printf("\t\t1 - export OMP_POSEIDON=METRIC or export OMP_POSEIDON=metric.\n");
+    printf("\t\t2 - export OMP_POSEIDON_BOOST_PATH=/PATH/TO/BOOST.SH/\n");
     lib_init(3,0); 
     *pvalue = -1;
     return false;
@@ -130,19 +118,19 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
   if ((strcmp("PERFORMANCE",env) == 0) || (strcmp("performance",env) == 0)) {
     printf("POSEIDON - OpenMP Application Optimized for Performance\n");
     *pvalue = 1;
-    system(command);
+    start_turbo_engine(boost_path);
   } else if ((strcmp("EDP",env) == 0) || (strcmp("edp",env) == 0)) {
     printf("POSEIDON - OpenMP Application Optimized for EDP\n");
     *pvalue = 2;
-    system(command);
+    start_turbo_engine(boost_path);
   } else if ((strcmp("POWER",env) == 0) || (strcmp("power",env) == 0)) {
     printf("POSEIDON - OpenMP Application Optimized for Power\n");
     *pvalue = 3;
-    system(command);
+    start_turbo_engine(boost_path);
   } else if ((strcmp("TEMPERATURE",env) == 0) || (strcmp("temperature",env) == 0)){
     printf("POSEIDON - OpenMP Application Optimized for Temperature\n");
     *pvalue = 4;
-    system(command);
+    start_turbo_engine(boost_path);
   } else {
     printf("POSEIDON - Optimization not recognized or libgomp path not found!\n");
     printf("POSEIDON: Disabled\n");
@@ -153,8 +141,14 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     lib_init(3,0);
     return false;
   }
-	free(command);
   return true;
+}
+
+static void
+start_turbo_engine(const char *boost_path) {
+  char command[150];
+  snprintf(command, sizeof(command), "bash %s/boost.sh %d &", getenv(boost_path), getpid());
+  system(command)
 }
 
 
