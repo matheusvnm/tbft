@@ -54,9 +54,9 @@ def install_tbft(args):
     print("Running TBFT test...")
     run_tbft_tests(args)
     print("Tests successfully executed!")
-    print("Setting TBFT environment variables...")
-    set_environment_variables(args)
-    print("Environment variables settings successful...")
+    #print("Setting TBFT environment variables...")
+    #set_environment_variables(args)
+    #print("Environment variables settings successful...")
 
 def compile_tbft(args):
     shutil.copytree(f'./{args.platform}', f'{args.gcc}/libgomp')
@@ -79,7 +79,7 @@ def set_environment_variables(args):
                 file.write(line)
         file.write(f'export LD_LIBRARY_PATH={args.prefix_gcc_bin}/lib64')
         file.write(f'export OMP_POSEIDON_BOOST_PATH={args.prefix_gcc_bin}/lib64')
-        
+
     os.system(f"exec {args.shell}")
 
 
