@@ -16,6 +16,7 @@ else
     TURBO_ENABLED="1"
 fi
 
+#CPU_MAX_FREQ=$(</sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq)
 BOOST_INTERFACE_PATH=${DRIVERS[$SCALING_DRIVER]}
 ACTUAL_STATE=$(<${BOOST_INTERFACE_PATH})
 APPLICATION_PROCESS_ID=$1
