@@ -21,8 +21,7 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 1. MSR Module (only in AMD Version).
 2. Intel RAPL (only in Intel Version).
 3. ACPI cpu-freq driver.
-
-**IMPORTANT: Poseidon only works with GCC 9.X version or superior.**
+4. GCC 9.4+.
 
 
 ### How to install TBFT?
@@ -30,7 +29,8 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 
 1. Choose the version you are going to use based on your processor (Intel or AMD).
 2. Copy all files into the gcc libgomp directory:
-      - cp * /path/gcc-version/libgomp.
+      - cp processor_version/* /path/gcc-version/libgomp.
+      - cp shared/* /path/gcc-version/libgomp.
 3. Compile the GCC using Make && Make install:
       - cd /path/gcc-version/libgomp
       - make
@@ -42,12 +42,15 @@ Thread and Boosting Frequency Throttling (TBFT) is an easy to use OpenMP framewo
 
 1. Export the library path, the full boost.sh path and set TBFT's environment variable:
       - export LD_LIBRARY_PATH=/path-to-gcc-bin/lib64:$LD_LIBRARY_PATH
-      - export OMP_TBFT_BOOST_PATH=/path-to-boost.sh/
-      - export OMP_TBFT=TRUE
+      - export OMP_URANO_BOOST_PATH=/gcc-version/libgomp
+      - export OMP_URANO=TRUE
       
 2. Execute the application.
 
-
+3. (OPTIONAL) Export the IPC Threshold and Time Interval for the Turbo Mode Engine.
+      - export IPC_TARGET=0.6 (Can be any value in the format %d.%d)
+      - export TIME_TARGET=1 (Can be any value in the format %d)
+x
 ### Acknowledgement
 ---
 

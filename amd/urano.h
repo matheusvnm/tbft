@@ -21,35 +21,26 @@
 #define AMD_ENERGY_UNIT_MASK 0x1F00
 #define AMD_POWER_UNIT_MASK 0xF
 #define STRING_BUFFER 1024
-#define MAX_CPUS                128 
-#define MAX_PACKAGES            4 
+#define MAX_CPUS 128
+#define MAX_PACKAGES 4
 
+/*Define TBFT/Urano environment*/
 
-/*Define AURORA environment*/
+#define MAX_KERNEL 61
+#define MAX_THREADS 32
+#define PERFORMANCE 1
+#define EDP 2
+#define POWER 3
+#define TEMPERATURE 4
 
-#define MAX_KERNEL              61
-#define MAX_THREADS             32
-#define PERFORMANCE             1
-#define EDP                     2
-#define POWER		        3
-#define TEMPERATURE             4
-#define TURBO_ON		1
-#define TURBO_OFF		0
-
-
-
-#define END                     10
-#define S0                      0
-#define S1                      1
-#define S2                      2
-#define S3                      3
-#define REPEAT                  4
-#define SEQUENTIAL_BASE_TESTED  115
+#define END 10
+#define S0 0
+#define S1 1
+#define S2 2
+#define S3 3
+#define REPEAT 4
+#define SEQUENTIAL_BASE_TESTED 115
 #define SEQUENTIAL_BASE_NOT_TESTED 116
-
-
-
-
 
 /*Global variables*/
 
@@ -58,22 +49,20 @@ char packname[MAX_PACKAGES][256];
 char tempfile[256];
 double initGlobalTime = 0.0;
 unsigned long int idKernels[MAX_KERNEL];
-short int id_actual_region=0;
+short int id_actual_region = 0;
 short int metric;
-short int totalKernels=0;
-short int libTotalPackages=0;
-short int libTotalCores=0;
+short int totalKernels = 0;
+short int libTotalPackages = 0;
+short int libTotalCores = 0;
 
-
-
-typedef struct{
+typedef struct
+{
         short int numThreads;
         short int numCores;
         short int bestThread;
         short int startThreads;
         short int metric;
         short int state;
-        int bestFreq;
         short int hasSequentialBase;
         short int pass;
         short int lastThread;
@@ -82,7 +71,6 @@ typedef struct{
         long long kernelAfter[MAX_PACKAGES];
         long long kernelBeforeSeq[MAX_PACKAGES];
         long long kernelAfterSeq[MAX_PACKAGES];
-}typeFrame;
+} typeFrame;
 
 typeFrame libKernels[MAX_KERNEL];
-
