@@ -46,7 +46,7 @@ Urano is an easy to use OpenMP framework that is completely transparent to both 
       
 2. Execute the application.
 
-3. (OPTIONAL) Export the IPC Threshold and Time Interval for the Turbo Mode Engine.
+3. (OPTIONAL) Export the IPC Threshold and Time Interval for the Turbo Engine.
       - export IPC_TARGET=0.6 (Can be any value in the format %d.%d)
       - export TIME_TARGET=1 (Can be any value in the format %d)
 x
