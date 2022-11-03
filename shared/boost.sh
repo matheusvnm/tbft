@@ -1,8 +1,8 @@
 #!/bin/bash
 
 declare -A DRIVERS=(
-    [acpi - cpufreq]="/sys/devices/system/cpu/cpufreq/boost"
-    [amd - pstate]="/sys/devices/system/cpu/cpufreq/boost"
+    [acpi-cpufreq]="/sys/devices/system/cpu/cpufreq/boost"
+    [amd-pstate]="/sys/devices/system/cpu/cpufreq/boost"
     [intel_cpufreq]="/sys/devices/system/cpu/intel_pstate/no_turbo"
     [intel_pstate]="/sys/devices/system/cpu/intel_pstate/no_turbo"
 )

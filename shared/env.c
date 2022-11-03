@@ -155,6 +155,12 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     *pvalue = 4;
     system(command);
   }
+  else if ((strcmp("ECD_POWER_PERF", env) == 0) || (strcmp("ecd_power_perf", env) == 0))
+  {
+    printf("POSEIDON - OpenMP Application Optimized for Power/Performance Euclidian Distance\n");
+    *pvalue = 5;
+    system(command);
+  }
   else
   {
     printf("POSEIDON - Optimization not recognized or libgomp path not found!\n");

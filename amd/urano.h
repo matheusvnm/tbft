@@ -1,5 +1,6 @@
 #include "libgomp.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -24,23 +25,6 @@
 #define MAX_CPUS 128
 #define MAX_PACKAGES 4
 
-/*Define TBFT/Urano environment*/
-
-#define MAX_KERNEL 61
-#define MAX_THREADS 32
-#define PERFORMANCE 1
-#define EDP 2
-#define POWER 3
-#define TEMPERATURE 4
-
-#define END 10
-#define S0 0
-#define S1 1
-#define S2 2
-#define S3 3
-#define REPEAT 4
-#define SEQUENTIAL_BASE_TESTED 115
-#define SEQUENTIAL_BASE_NOT_TESTED 116
 
 /*Global variables*/
 
@@ -137,7 +121,6 @@ void lib_detect_packages()
     }
 }
 
-
 void lib_start_energy_collection()
 {
     char msr_filename[STRING_BUFFER];
@@ -169,7 +152,6 @@ void lib_start_energy_collection()
     close(fd);
 }
 
-
 double lib_end_energy_collection()
 {
     char msr_filename[STRING_BUFFER];
@@ -185,37 +167,4 @@ double lib_end_energy_collection()
     double result = (libKernels[id_actual_region].kernelAfter[0] - libKernels[id_actual_region].kernelBefore[0]) * pow(0.5, (float)(energy_unit));
     close(fd);
     return result;
-}
-
-
-/* It finalizes the environment of TBFT/Urano */
-void lib_destructor()
-{
-    double time = omp_get_wtime() - initGlobalTime;
-    id_actual_region = MAX_KERNEL - 1;
-    double energy = lib_end_energy_collection();
-    float edp = time * energy;
-    float power = energy / time;
-    float euclidian_distance = sqrt((power * power) + (time * time));
-    printf("TBFT/Urano - Execution Time: %.5f seconds\n", time);
-    printf("TBFT/Urano - Energy: %.5f joules\n", energy);
-    printf("TBFT/Urano - EDP: %.5f\n", edp);
-    printf("TBFT/Urano - Power Consumption: %.5f\n", power);
-    printf("TBFT/Urano - Eudiclian Distance (Power - Execution Time): %.5f\n", euclidian_distance);
-    printf("TBFT/Urano - Number of Detected Regions: %d\n", totalKernels);
-
-    printf("[");
-    for (int i = 0; i < tot; i++)
-    {
-        if (libKernels[i].bestThread != 0)
-        {
-            printf(" %d ", libKernels[i].bestThread);
-        }
-        else
-        {
-            printf(" %d* ", libKernels[i].numThreads);
-        }
-    }
-    printf("]\n");
-    printf("TBFT/Urano - Regions with * after the number means that the given region did not finished the search because it executes too few iterations.\n");
 }
