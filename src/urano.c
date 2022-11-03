@@ -239,8 +239,8 @@ void lib_destructor()
     printf("TBFT/Urano - Power Consumption: %.5f watts\n", power);
     printf("TBFT/Urano - Eudiclian Distance (Power - Execution Time): %.5f\n", euclidian_distance);
     printf("TBFT/Urano - Number of Detected Regions: %d\n", totalKernels);
-
-    printf("[");
+    printf("TBFT/Urano - Number of Threads per Region [");
+    
     for (int i = 0; i < totalKernels; i++)
     {
         if (libKernels[i].bestThread != 0)
