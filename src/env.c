@@ -112,7 +112,7 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     char *env = getenv(name);
     char *turbo_path = getenv(turbo_path_var_name);
 
-    if (env == NULL || boost_path == NULL)
+    if (env == NULL || turbo_path == NULL)
     {
         printf("TBFT/Urano: Disabled\n");
         printf("\n\t\tPlease follow the steps:\n");
@@ -155,7 +155,7 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     }
     else if ((strcmp("ECD_POWER_PERF", env) == 0) || (strcmp("ecd_power_perf", env) == 0))
     {
-        printf("POSEIDON - OpenMP Application Optimized for Power-Performance Euclidian Distance\n");
+        printf("TBFT/Urano - OpenMP Application Optimized for Power-Performance Euclidian Distance\n");
         start_turbo_engine(turbo_path);
         *pvalue = 5;
     }
@@ -179,7 +179,7 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
     return true;
 }
 
-static void start_turbo_engine(char *boost_path)
+static void start_turbo_engine(char *turbo_path)
 {
     char command[150];
     snprintf(command, sizeof(command), "bash %s/turbo_engine.sh %d &", boost_path, getpid());
@@ -1387,10 +1387,10 @@ initialize_env(void)
     parse_int("OMP_DEFAULT_DEVICE", &gomp_global_icv.default_device_var, true);
     parse_int("OMP_MAX_TASK_PRIORITY", &gomp_max_task_priority_var, true);
     parse_unsigned_long("OMP_MAX_ACTIVE_LEVELS", &gomp_max_active_levels_var, true);
-    parse_lib("OMP_POSEIDON", &gomp_global_icv.lib_var, true, "OMP_POSEIDON_BOOST_PATH");
+    parse_lib("OMP_URANO", &gomp_global_icv.lib_var, true, "OMP_URANO_BOOST_PATH");
     if (gomp_global_icv.lib_var != -1)
     {
-        parse_int("OMP_POSEIDON_START_SEARCH", &gomp_global_icv.lib_start_search, true);
+        parse_int("OMP_URANO_START_SEARCH", &gomp_global_icv.lib_start_search, true);
         lib_init(gomp_global_icv.lib_var, gomp_global_icv.lib_start_search);
     }
     if (parse_unsigned_long("OMP_THREAD_LIMIT", &thread_limit_var, false))
