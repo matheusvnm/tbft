@@ -106,11 +106,18 @@ int goacc_default_dims[GOMP_DIM_MAX];
 
 /* Parse the OMP_URANO environment variable.  */
 
-static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char *turbo_path_var_name)
+static void 
+start_turbo_engine(char *turbo_path)
 {
-    char pid[10];
+    char command[150];
+    snprintf(command, sizeof(command), "bash %s/turbo_engine.sh %d &", turbo_path, getpid());
+    system(command);
+}
+
+static bool parse_lib(const char *name, int *pvalue, bool allow_zero)
+{
     char *env = getenv(name);
-    char *turbo_path = getenv(turbo_path_var_name);
+    char *turbo_path = getenv("OMP_URANO_BOOST_PATH");
 
     if (env == NULL || turbo_path == NULL)
     {
@@ -177,13 +184,6 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
         return false;
     }
     return true;
-}
-
-static void start_turbo_engine(char *turbo_path)
-{
-    char command[150];
-    snprintf(command, sizeof(command), "bash %s/turbo_engine.sh %d &", boost_path, getpid());
-    system(command);
 }
 
 /* Parse the OMP_SCHEDULE environment variable.  */
@@ -1387,7 +1387,7 @@ initialize_env(void)
     parse_int("OMP_DEFAULT_DEVICE", &gomp_global_icv.default_device_var, true);
     parse_int("OMP_MAX_TASK_PRIORITY", &gomp_max_task_priority_var, true);
     parse_unsigned_long("OMP_MAX_ACTIVE_LEVELS", &gomp_max_active_levels_var, true);
-    parse_lib("OMP_URANO", &gomp_global_icv.lib_var, true, "OMP_URANO_BOOST_PATH");
+    parse_lib("OMP_URANO", &gomp_global_icv.lib_var, true);
     if (gomp_global_icv.lib_var != -1)
     {
         parse_int("OMP_URANO_START_SEARCH", &gomp_global_icv.lib_start_search, true);

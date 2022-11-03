@@ -43,7 +43,7 @@ void lib_start_energy_collection(void);
 double lib_end_energy_collection(void);
 int lib_resolve_num_threads(uintptr_t ptr_region);
 void lib_end_parallel_region(void);
-void start_turbo_engine(char *turbo_path);
+
 
 /* barrier.c */
 
