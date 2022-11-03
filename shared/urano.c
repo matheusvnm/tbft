@@ -1,6 +1,5 @@
 /* File that contains the variable declarations */
 #include "urano.h"
-#include "urano_states.h"
 
 /* It defines the number of threads that will execute the actual parallel region based on the current state of the search algorithm */
 int lib_resolve_num_threads(uintptr_t ptr_region)
