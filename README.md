@@ -28,8 +28,8 @@ Urano is an easy to use OpenMP framework that is completely transparent to both 
 
 1. Choose the version you are going to use based on your processor (Intel or AMD).
 2. Copy all files into the gcc libgomp directory:
-      - cp processor_version/* /path/gcc-version/libgomp.
-      - cp shared/* /path/gcc-version/libgomp.
+      - cp processor_headers/* /path/gcc-version/libgomp.
+      - cp src/* /path/gcc-version/libgomp.
 3. Compile the GCC using Make && Make install:
       - cd /path/gcc-version/libgomp
       - make
