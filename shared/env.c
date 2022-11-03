@@ -157,17 +157,23 @@ static bool parse_lib(const char *name, int *pvalue, bool allow_zero, const char
   }
   else if ((strcmp("ECD_POWER_PERF", env) == 0) || (strcmp("ecd_power_perf", env) == 0))
   {
-    printf("POSEIDON - OpenMP Application Optimized for Power/Performance Euclidian Distance\n");
+    printf("POSEIDON - OpenMP Application Optimized for Power-Performance Euclidian Distance\n");
     *pvalue = 5;
     system(command);
   }
   else
   {
-    printf("POSEIDON - Optimization not recognized or libgomp path not found!\n");
+    printf("POSEIDON - Optimization not recognized!\n");
     printf("POSEIDON: Disabled\n");
     printf("\n\t\tPlease follow the steps:\n");
     printf("\t\t1 - export OMP_POSEIDON=METRIC or export OMP_POSEIDON=metric.\n");
     printf("\t\t2 - export OMP_POSEIDON_BOOST_PATH=/PATH/TO/BOOST.SH/\n");
+    printf("\t\t**Possible metrics**\n");
+    printf("\t\t\t PERFORMANCE or performance\n");
+    printf("\t\t\t EDP or edp\n");
+    printf("\t\t\t POWER or power\n");
+    printf("\t\t\t TEMPERATURE or temperature\n");
+    printf("\t\t\t ECD_POWER_PERF or ECD_POWER_PERF\n");
     *pvalue = -1;
     lib_init(3, 0);
     return false;
