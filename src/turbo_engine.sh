@@ -22,14 +22,14 @@ ACTUAL_STATE=$(<${BOOST_INTERFACE_PATH})
 APPLICATION_PROCESS_ID=$1
 
 if [ -z "$IPC_TARGET" ]; then
-    echo "IPC_TARGET env var is empty!"
-    echo "Using default value of 0.5"
+    echo "TBFT/Urano - The environment variable IPC_TARGET is not set."
+    echo "TBFT/Urano - Using default value: 0.5"
     IPC_TARGET=0.5
 fi
 
 if [ -z "$TIME_TARGET" ]; then
-    echo "TIME_TARGET env var is empty!"
-    echo "Using default value of 1"
+    echo "TBFT/Urano - The environment variable TIME_TARGET is not set."
+    echo "TBFT/Urano - Using default value: 1"
     TIME_TARGET=1
 fi
 
