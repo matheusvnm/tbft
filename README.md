@@ -57,4 +57,13 @@ Urano/TBFT has been mainly developed by Sandro Matheus Vila Nova Marques (sandro
 
 When using Urano/TBFT, please use the following reference:
 
-XXXXXXX
+Marques, S. M., Medeiros, T. S., Rossi, F. D., Luizelli, M. C., Beck, A. C. S., & Lorenzon, A. F. (2021, December). Synergically Rebalancing Parallel Execution via DCT and Turbo Boosting. In 2021 58th ACM/IEEE Design Automation Conference (DAC) (pp. 277-282). IEEE.
+
+or
+
+Marques, S. M. V., Serpa, M. S., Muñoz, A. N., Rossi, F. D., Luizelli, M. C., Navaux, P. O., ... & Lorenzon, A. F. (2022). Optimizing the EDP of OpenMP applications via concurrency throttling and frequency boosting. Journal of Systems Architecture, 123, 102379.
+
+or 
+
+Marques, S. M., Rossi, F. D., Luizelli, M. C., Beck, A. C. S., & Lorenzon, A. F. (2022, August). Thermal-Aware Thread and Turbo Frequency Throttling Optimization for Parallel Applications. In 2022 35th SBC/SBMicro/IEEE/ACM Symposium on Integrated Circuits and Systems Design (SBCCI) (pp. 1-6). IEEE.
+
